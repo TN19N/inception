@@ -4,6 +4,14 @@ RUN apk update && \
     apk upgrade --no-cach && \
     apk add --no-cach nginx=1.22.0-r1
 
-EXPOSE 80/tcp
+EXPOSE 443
 
-CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+WORKDIR /etc/nginx
+
+COPY conf/nginx.conf nginx.conf
+
+COPY conf/default.conf http.d/default.conf
+
+COPY index.html /index.html
+
+CMD ["/usr/sbin/nginx"]

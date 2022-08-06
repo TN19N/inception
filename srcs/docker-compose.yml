@@ -3,3 +3,5 @@ version : "3.8"
 services:
         nginx:
                 bulid: ./requirements/nginx
+                ports:
+                        - "443:443"
