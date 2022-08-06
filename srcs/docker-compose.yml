@@ -1,7 +1,9 @@
-version : "3.8"
+version : "3"
 
 services:
         nginx:
-                bulid: ./requirements/nginx
+                build: ./requirements/nginx
+                image: nginx:1.22.0
+                container_name: nginx
                 ports:
                         - "443:443"
