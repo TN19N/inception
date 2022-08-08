@@ -1,7 +1,7 @@
 
 server {
 	listen 443;
-	server_name www.${DOMAIN_NAME} ${DOMAIN_NAME};
+	server_name ${DOMAIN_NAME} www.${DOMAIN_NAME};
 
 	location / {
 		root /;

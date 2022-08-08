@@ -9,12 +9,12 @@ EXPOSE 443
 
 WORKDIR /etc/nginx/http.d
 
+COPY tools/run_nginx.sh /
+
 COPY conf/nginx.conf ../nginx.conf
 
 COPY conf/default.templat .
 
 COPY index.html /index.html
-
-COPY tools/run_nginx.sh /
 
 CMD ["/run_nginx.sh"]
