@@ -1,9 +1,9 @@
 
 all:
-	cd srcs && sudo docker-compose up --build -d
+	cd srcs && sudo docker-compose up --build
 
 clean :
-	cd srcs && sudo docker-compose down
+	sudo docker rm $$(sudo docker ps -aq)
 
 fclean: clean
 	sudo docker rmi $$(sudo docker images -q)
