@@ -8,14 +8,8 @@ RUN apk update && \
 
 EXPOSE 443
 
-WORKDIR /etc/nginx/http.d
+WORKDIR /etc/nginx
 
-COPY tools/run_nginx.sh ..
+COPY . .
 
-COPY conf/nginx.conf ../nginx.conf
-
-COPY conf/default.templat .
-
-COPY index.html /
-
-CMD ["../run_nginx.sh"]
+CMD ["tools/run_nginx.sh"]
