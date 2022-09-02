@@ -1,11 +1,11 @@
 run: build
-	sudo docker-compose -f srcs/docker-compose.yml up
+	cd ./srcs && sudo docker-compose up
 
 build:
-	sudo docker-compose -f srcs/docker-compose.yml build
+	cd ./srcs && sudo docker-compose build
 
 clean:
 	sudo docker container prune -f
 
 fclean: clean
-	sudo docker image prune -a
+	sudo docker image prune -fa
