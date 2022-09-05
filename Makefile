@@ -9,4 +9,3 @@ clean:
 
 fclean: clean
 	sudo docker image prune -fa
-
