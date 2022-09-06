@@ -4,6 +4,7 @@ services:
                 build: ./requirements/nginx
                 image: nginx:1.22.0
                 container_name: nginx
+                #                restart: always
                 ports:
                         - "443:443"
                 environment:

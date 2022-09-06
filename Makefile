@@ -1,5 +1,5 @@
 run: build
-	cd ./srcs && sudo docker-compose up
+	cd ./srcs && sudo docker-compose up -d
 
 build:
 	cd ./srcs && sudo docker-compose build
