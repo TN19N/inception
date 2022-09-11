@@ -16,6 +16,6 @@ COPY conf/default.template ./http.d/
 
 COPY tools/index.html /
 
-COPY tools/start_nginx.sh .
+COPY tools/run.sh .
 
-CMD ["./start_nginx.sh"]
+CMD ["./run.sh"]
