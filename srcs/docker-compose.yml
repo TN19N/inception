@@ -6,3 +6,5 @@ services:
                 container_name: nginx
                 ports:
                         - "80:80"
+                environment:
+                       DOMAIN_NAME: "${DOMAIN_NAME}"
