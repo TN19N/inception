@@ -5,6 +5,6 @@ services:
                 image: nginx:1.22.0
                 container_name: nginx
                 ports:
-                        - "80:80"
+                        - "443:443"
                 environment:
                        DOMAIN_NAME: "${DOMAIN_NAME}"

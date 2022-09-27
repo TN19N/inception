@@ -1,5 +1,5 @@
 all:
-	cd srcs && sudo docker-compose up --build
+	cd srcs && sudo docker-compose up --build -d
 clean:
 	cd srcs && sudo docker-compose down
 	sudo docker container prune -f
