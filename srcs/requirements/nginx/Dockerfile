@@ -1,8 +1,8 @@
 FROM alpine:3.16.2
 
 RUN apk update && \
-    apk upgrade && \
-    apk add nginx=1.22.0-r1 gettext openssl
+    apk upgrade --no-cache && \
+    apk add --no-cache nginx=1.22.0-r1 gettext openssl
 
 EXPOSE 443
 

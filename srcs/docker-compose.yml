@@ -1,10 +1,25 @@
 version: "3.8"
 services:
-        nginx:
-                build: requirements/nginx
-                image: nginx:1.22.0
-                container_name: nginx
+        # nginx:
+        #        build: requirements/nginx
+        #        image: nginx:1.22.0
+        #        container_name: nginx
+        #        ports:
+        #                - "443:443"
+        #        environment:
+        #               DOMAIN_NAME: "${DOMAIN_NAME}"
+        db:
+                build: requirements/mariadb
+                image: mariadb:10.6.9
+                container_name: mariadb
                 ports:
-                        - "443:443"
+                        - "3306:3306"
                 environment:
-                       DOMAIN_NAME: "${DOMAIN_NAME}"
+                        MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+                        MYSQL_USER: "${MYSQL_USER}"
+                        MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+                        MYSQL_DATABASE: "${MYSQL_DATABASE}"
+                volumes:
+                        - /home/mannouao/data/db:/var/lib/mysql
+                stdin_open: true
+                tty: true
