@@ -1,19 +1,23 @@
 version: "3.8"
 services:
-        # nginx:
-        #        build: requirements/nginx
-        #        image: nginx:1.22.0
-        #        container_name: nginx
-        #        ports:
-        #                - "443:443"
-        #        environment:
-        #               DOMAIN_NAME: "${DOMAIN_NAME}"
-        db:
+        nginx:
+                depends_on: ["wordpress"]
+                build: requirements/nginx
+                image: nginx:1.22.0
+                container_name: nginx
+                ports: ["443:443"]
+                environment:
+                        DOMAIN_NAME: "${DOMAIN_NAME}"
+                volumes:
+                        - "${CERTS_}:/etc/nginx/certs"
+                        - "/home/mannouao/data/www:/var/www/html"
+                networks: ["myNetwork"]
+                stdin_open: true
+                tty: true
+        mariadb:
                 build: requirements/mariadb
                 image: mariadb:10.6.9
                 container_name: mariadb
-                ports:
-                        - "3306:3306"
                 environment:
                         MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
                         MYSQL_USER: "${MYSQL_USER}"
@@ -21,5 +25,19 @@ services:
                         MYSQL_DATABASE: "${MYSQL_DATABASE}"
                 volumes:
                         - /home/mannouao/data/db:/var/lib/mysql
-                stdin_open: true
-                tty: true
+                networks: ["myNetwork"]
+        wordpress:
+                depends_on: ["mariadb"]
+                build: requirements/wordpress
+                image: wodpress:6.0.2
+                container_name: wordpress
+                environment:
+                        WORDPRESS_DB_HOST: "mariadb"
+                        WORDPRESS_DB_USER: "${MYSQL_USER}"
+                        WORDPRESS_DB_PASSWORD: "${MYSQL_PASSWORD}"
+                        WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
+                volumes:
+                        - /home/mannouao/data/www:/var/www/html
+                networks: ["myNetwork"]
+networks:
+        myNetwork:

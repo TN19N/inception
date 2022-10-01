@@ -1,7 +1,10 @@
 all:
+	  sudo ./srcs/requirements/tools/init.sh
 	@ cd srcs && sudo docker-compose up --build -d
 clean:
 	@ cd srcs && sudo docker-compose down
 	@ sudo docker container prune -f
 	@ sudo docker image prune -af
-re: clean all
+
+restart:
+	@sudo rm -rf /home/$(USER)/data/*
