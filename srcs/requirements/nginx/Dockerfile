@@ -8,8 +8,6 @@ EXPOSE 443
 
 WORKDIR /etc/nginx
 
-RUN ["mkdir", "certs"]
-
 COPY conf/nginx.conf nginx.conf
 
 ADD conf/server.conf.template http.d/

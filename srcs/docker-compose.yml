@@ -10,10 +10,8 @@ services:
                         DOMAIN_NAME: "${DOMAIN_NAME}"
                 volumes:
                         - "${CERTS_}:/etc/nginx/certs"
-                        - "/home/mannouao/data/www:/var/www/html"
+                        - "/home/mannouao/data/www:/var/www"
                 networks: ["myNetwork"]
-                stdin_open: true
-                tty: true
         mariadb:
                 build: requirements/mariadb
                 image: mariadb:10.6.9
@@ -24,7 +22,7 @@ services:
                         MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
                         MYSQL_DATABASE: "${MYSQL_DATABASE}"
                 volumes:
-                        - /home/mannouao/data/db:/var/lib/mysql
+                        - "/home/mannouao/data/db:/var/lib/mysql"
                 networks: ["myNetwork"]
         wordpress:
                 depends_on: ["mariadb"]
@@ -37,7 +35,7 @@ services:
                         WORDPRESS_DB_PASSWORD: "${MYSQL_PASSWORD}"
                         WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
                 volumes:
-                        - /home/mannouao/data/www:/var/www/html
+                        - "/home/mannouao/data/www:/var/www"
                 networks: ["myNetwork"]
 networks:
         myNetwork:

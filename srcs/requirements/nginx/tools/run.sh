@@ -4,10 +4,10 @@ cd http.d
 
 export DOLLAR='$'
 
-chown -R nginx:nginx /var/www/html/wordpress
+chown -R nginx:nginx /var/www/wordpress
 
 envsubst < server.conf.template > server.conf
 
-rm -f *.template default.conf
+rm -f server.conf.template default.conf
 
 nginx -g 'daemon off;'
