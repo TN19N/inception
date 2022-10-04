@@ -2,9 +2,9 @@
 
 export DOLLAR='$'
 
-envsubst < /etc/php8/php-fpm.d/wp-config.php.template > /var/www/wordpress/wp-config.php
+envsubst < wp-config.php.template > /var/www/wordpress/wp-config.php
 
-rm -rf /etc/php8/php-fpm.d/wp-config.php.template
+rm -rf wp-config.php.template
 
 mkdir -p /var/log/php-fpm8
 
