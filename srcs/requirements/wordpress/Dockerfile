@@ -2,7 +2,8 @@ FROM alpine:3.16.2
 
 RUN apk update && \
     apk upgrade --no-cache && \
-    apk add --no-cache php8 php8-fpm gettext
+    apk add --no-cache php8 php8-fpm php8-opcache php8-gd \
+		       php8-mysqli php8-zlib php8-curl gettext
 
 EXPOSE 9000
 
