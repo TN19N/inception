@@ -42,5 +42,9 @@ services:
                 image: redis:7.0
                 container_name: redis
                 networks: ["myNetwork"]
+        ftp:
+                build: requirements/bonus/ftp
+                image: ftp
+                container_name: ftp
 networks:
         myNetwork:
