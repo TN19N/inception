@@ -25,7 +25,7 @@ services:
                         - "/home/mannouao/data/db:/var/lib/mysql"
                 networks: ["myNetwork"]
         wordpress:
-                depends_on: ["mariadb"]
+                depends_on: ["mariadb", "redis"]
                 build: requirements/wordpress
                 image: wodpress:6.0.2
                 container_name: wordpress
@@ -36,6 +36,11 @@ services:
                         WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
                 volumes:
                         - "/home/mannouao/data/www:/var/www"
+                networks: ["myNetwork"]
+        redis:
+                build: requirements/bonus/redis
+                image: redis:7.0
+                container_name: redis
                 networks: ["myNetwork"]
 networks:
         myNetwork:
