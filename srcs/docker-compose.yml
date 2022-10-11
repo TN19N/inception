@@ -9,7 +9,6 @@ services:
                 environment:
                         DOMAIN_NAME: "${DOMAIN_NAME}"
                 volumes:
-                        - "${CERTS_}:/etc/nginx/certs"
                         - "/home/mannouao/data/www:/var/www"
                 networks: ["myNetwork"]
         mariadb:
@@ -44,7 +43,10 @@ services:
                 networks: ["myNetwork"]
         ftp:
                 build: requirements/bonus/ftp
-                image: ftp
+                image: ftp:3.0.5
                 container_name: ftp
+                ports: ["20:20", "30000-30009:30000-30009"]
+                volumes:
+                        - "/home/mannouao/data/www/wordpress:/var/www/html"
 networks:
         myNetwork:

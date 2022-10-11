@@ -7,4 +7,3 @@ clean:
 	sudo docker image prune -af
 restart:
 	sudo rm -rf /home/mannouao/data/*
-	sudo rm -rf src/requirements/tools/certs/*
