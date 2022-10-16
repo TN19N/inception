@@ -1,9 +1,6 @@
 #!/bin/bash
 
-export $(cat /home/mannouao/Desktop/inception/srcs/.env | grep "DOMAIN_NAME=")
-
-mkdir -p "/home/${SUDO_USER}/data/db"
-mkdir -p "/home/${SUDO_USER}/data/www"
+export $(cat ../../.env | grep "DOMAIN_NAME=")
 
 if ! grep -q "$DOMAIN_NAME" /etc/hosts; then
 	echo "127.0.0.1		$DOMAIN_NAME" >> /etc/hosts;

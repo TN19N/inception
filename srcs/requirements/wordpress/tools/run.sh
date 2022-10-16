@@ -1,10 +1,15 @@
 #!/bin/sh
 
-export DOLLAR='$'
+wp --dbname="${WORDPRESS_DB_NAME}" \
+	--dbuser="${MYSQL_USER}" \
+	--dbpass="${MYSQL_PASSWORD}" \
+	--dbhost="${WORDPRESS_DB_HOST}" \
+	--force \
+	--extra-php << EOF
+define('WP_REDIS_HOST', 'redis');
+EOF
 
-envsubst < wp-config.php.template > /var/www/wordpress/wp-config.php
-
-rm -rf wp-config.php.template
+wp plugin install redis-cache --activate
 
 mkdir -p /var/log/php-fpm8
 

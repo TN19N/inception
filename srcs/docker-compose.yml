@@ -1,52 +1,67 @@
-version: "3.8"
+version: "3.9"
 services:
         nginx:
                 depends_on: ["wordpress"]
-                build: requirements/nginx
-                image: nginx:1.22.0
-                container_name: nginx
+                build: "requirements/nginx"
+                image: "nginx:1.22.0"
+                container_name: "nginx"
                 ports: ["443:443"]
                 environment:
                         DOMAIN_NAME: "${DOMAIN_NAME}"
                 volumes:
-                        - "/home/mannouao/data/www:/var/www"
+                        - "wordpress:/var/www/wordpress"
                 networks: ["myNetwork"]
         mariadb:
-                build: requirements/mariadb
-                image: mariadb:10.6.9
-                container_name: mariadb
+                build: "requirements/mariadb"
+                image: "mariadb:10.6.9"
+                container_name: "mariadb"
                 environment:
                         MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
                         MYSQL_USER: "${MYSQL_USER}"
                         MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
                         MYSQL_DATABASE: "${MYSQL_DATABASE}"
                 volumes:
-                        - "/home/mannouao/data/db:/var/lib/mysql"
+                        - "db:/var/lib/mysql"
                 networks: ["myNetwork"]
         wordpress:
                 depends_on: ["mariadb", "redis"]
-                build: requirements/wordpress
-                image: wodpress:6.0.2
-                container_name: wordpress
+                build: "requirements/wordpress"
+                image: "wodpress:6.0.2"
+                container_name: "wordpress"
                 environment:
                         WORDPRESS_DB_HOST: "mariadb"
                         WORDPRESS_DB_USER: "${MYSQL_USER}"
                         WORDPRESS_DB_PASSWORD: "${MYSQL_PASSWORD}"
                         WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
                 volumes:
-                        - "/home/mannouao/data/www:/var/www"
+                        - "wordpress:/var/www/wordpress"
                 networks: ["myNetwork"]
         redis:
-                build: requirements/bonus/redis
-                image: redis:7.0
-                container_name: redis
+                build: "requirements/bonus/redis"
+                image: "redis:7.0"
+                container_name: "redis"
                 networks: ["myNetwork"]
         ftp:
-                build: requirements/bonus/ftp
-                image: ftp:3.0.5
-                container_name: ftp
-                ports: ["20:20", "30000-30009:30000-30009"]
+                depends_on: ["wordpress"]
+                build: "requirements/bonus/ftp"
+                image: "ftp:3.0.5"
+                container_name: "ftp"
+                ports: ["20:20", "21:21", "20100-20110:20100-20110"]
                 volumes:
-                        - "/home/mannouao/data/www/wordpress:/var/www/html"
+                        - "wordpress:/var/www/wordpress"
+volumes:
+        db:
+                driver: "local"
+                driver_opts:
+                        type: "none"
+                        o: "bind"
+                        device: "/home/mannouao/data/db"
+        wordpress:
+                driver: "local"
+                driver_opts:
+                        type: "none"
+                        o: "bind"
+                        device: "/home/mannouao/data/wordpress"
 networks:
         myNetwork:
+                driver: "bridge"
