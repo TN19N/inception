@@ -12,6 +12,10 @@ COPY conf/nginx.conf nginx.conf
 
 ADD conf/server.conf.template http.d/
 
-ADD tools/run.sh .
+ADD tools/* .
 
-CMD ["./run.sh"]
+RUN chmod +x docker-entrypoint.sh
+
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
+CMD ["nginx", "-g", "daemon off;"]

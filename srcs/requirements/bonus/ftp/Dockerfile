@@ -11,7 +11,8 @@ WORKDIR /etc/vsftpd
 RUN mkdir -p /var/www/html
 RUN mkdir -p /var/log/vsftpd && touch /var/log/vsftpd/vsftpd.log
 
-COPY tools/run.sh .
+ADD tools/* .
 COPY conf/vsftpd.conf vsftpd.conf
 
-CMD ["./run.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["vsftpd"]

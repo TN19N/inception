@@ -5,16 +5,22 @@ services:
                 build: "requirements/nginx"
                 image: "nginx:1.22.0"
                 container_name: "nginx"
+                init: true
+                restart: always
                 ports: ["443:443"]
                 environment:
                         DOMAIN_NAME: "${DOMAIN_NAME}"
                 volumes:
                         - "wordpress:/var/www/wordpress"
-                networks: ["myNetwork"]
+                networks:
+                        myNetwork:
+                                ipv4_address: 172.20.0.2
         mariadb:
                 build: "requirements/mariadb"
                 image: "mariadb:10.6.9"
                 container_name: "mariadb"
+                init: true
+                restart: always
                 environment:
                         MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
                         MYSQL_USER: "${MYSQL_USER}"
@@ -22,30 +28,47 @@ services:
                         MYSQL_DATABASE: "${MYSQL_DATABASE}"
                 volumes:
                         - "db:/var/lib/mysql"
-                networks: ["myNetwork"]
+                networks:
+                        myNetwork:
+                                ipv4_address: 172.20.0.3
+
         wordpress:
                 depends_on: ["mariadb", "redis"]
                 build: "requirements/wordpress"
                 image: "wodpress:6.0.2"
                 container_name: "wordpress"
+                init: true
+                restart: always
                 environment:
                         WORDPRESS_DB_HOST: "mariadb"
                         WORDPRESS_DB_USER: "${MYSQL_USER}"
                         WORDPRESS_DB_PASSWORD: "${MYSQL_PASSWORD}"
                         WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
+                        WORDPRESS_SITE_NAME: "${DOMAIN_NAME}"
+                        WORDPRESS_SITE_TITLE: "${WORDPRESS_SITE_TITLE}"
+                        WORDPRESS_ADMIN_NAME: "${WORDPRESS_ADMIN_PASSWORD}"
+                        WORDPRESS_ADMIN_EMAIL: "${WORDPRESS_ADMIN_EMAIL}"
                 volumes:
                         - "wordpress:/var/www/wordpress"
-                networks: ["myNetwork"]
+                networks:
+                        myNetwork:
+                                ipv4_address: 172.20.0.4
         redis:
                 build: "requirements/bonus/redis"
                 image: "redis:7.0"
                 container_name: "redis"
-                networks: ["myNetwork"]
+                init: true
+                restart: always
+                networks:
+                        myNetwork:
+                                ipv4_address: 172.20.0.5
         ftp:
                 depends_on: ["wordpress"]
                 build: "requirements/bonus/ftp"
                 image: "ftp:3.0.5"
                 container_name: "ftp"
+                init: true
+                restart: always
                 ports: ["20:20", "21:21", "20100-20110:20100-20110"]
                 volumes:
                         - "wordpress:/var/www/wordpress"
@@ -65,3 +88,6 @@ volumes:
 networks:
         myNetwork:
                 driver: "bridge"
+                ipam:
+                        config:
+                                - subnet: 172.20.0.0/16

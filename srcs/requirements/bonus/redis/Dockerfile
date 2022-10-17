@@ -6,6 +6,8 @@ RUN apk update && \
 
 EXPOSE 6379
 
-COPY tools/run.sh .
+COPY tools/* .
 
-CMD ["./run.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
+CMD ["redis-server", "--protected-mode", "no"]

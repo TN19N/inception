@@ -1,5 +1,5 @@
 all:
-	sudo ./srcs/requirements/tools/init.sh
+	sudo mkdir -p /home/mannouao/data/db /home/mannouao/data/wordpress
 	cd srcs && sudo docker compose up --build -d
 clean:
 	cd srcs && sudo docker compose down

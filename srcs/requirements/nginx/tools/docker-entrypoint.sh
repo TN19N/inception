@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 mkdir -p certs
 
@@ -17,4 +18,6 @@ envsubst < server.conf.template > server.conf
 
 rm -f server.conf.template default.conf
 
-nginx -g 'daemon off;'
+rm -rf docker-entrypoint.sh
+
+exec "$@"

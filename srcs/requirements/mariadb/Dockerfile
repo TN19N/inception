@@ -10,8 +10,13 @@ RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
 
 WORKDIR /etc/mysql
 
-ADD tools/run.sh .
+RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
 
-ADD conf/init.sql.template .
+ADD tools/* .
+ADD conf/* .
 
-CMD ["./run.sh"]
+RUN chmod +x docker-entrypoint.sh
+
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
+CMD ["mysqld", "--user=mysql", "--init-file=/etc/mysql/init.sql", "--skip-networking=0"]
