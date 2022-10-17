@@ -7,3 +7,7 @@ clean:
 	sudo docker image prune -af
 restart:
 	sudo rm -rf /home/mannouao/data/*
+git:
+	sudo git add .
+	sudo git commit -m " back Up "
+	sudo git push
