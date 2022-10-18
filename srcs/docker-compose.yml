@@ -49,6 +49,10 @@ services:
                         WORDPRESS_ADMIN_NAME: "${WORDPRESS_ADMIN_NAME}"
                         WORDPRESS_ADMIN_PASSWORD: "${WORDPRESS_ADMIN_PASSWORD}"
                         WORDPRESS_ADMIN_EMAIL: "${WORDPRESS_ADMIN_EMAIL}"
+                        WORDPRESS_USER_NAME: "${WORDPRESS_USER_NAME}"
+                        WORDPRESS_USER_EMAIL: "${WORDPRESS_USER_EMAIL}"
+                        WORDPRESS_USER_PASSWORD: "${WORDPRESS_USER_PASSWORD}"
+                        WORDPRESS_USER_ROLE: "${WORDPRESS_USER_ROLE}"
                 volumes:
                         - "wordpress:/var/www/wordpress"
                 networks:

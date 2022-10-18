@@ -19,6 +19,11 @@ wp core install --path=/var/www/wordpress \
 	--admin_email="${WORDPRESS_ADMIN_EMAIL}" \
 	--skip-email
 
+wp user create --path=/var/www/wordpress \
+       	${WORDPRESS_USER_NAME} ${WORDPRESS_USER_EMAIL}\
+	--role=${WORDPRESS_USER_ROLE} \
+	--user_pass=${WORDPRESS_USER_PASSWORD}
+
 wp plugin install redis-cache --path=/var/www/wordpress --activate
 
 wp redis enable --path=/var/www/wordpress
