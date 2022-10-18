@@ -1,13 +1,18 @@
 version: "3.9"
 services:
         nginx:
-                depends_on: ["wordpress"]
+                depends_on: 
+                        - "wordpress"
                 build: "requirements/nginx"
                 image: "nginx:1.22.0"
                 container_name: "nginx"
                 init: true
+                #command: sh #DEBUG
+                #stdin_open: true #DEBUG
+                #tty: true #DEBUG
                 restart: always
-                ports: ["443:443"]
+                ports:
+                        - "443:443"
                 environment:
                         DOMAIN_NAME: "${DOMAIN_NAME}"
                 volumes:
@@ -20,6 +25,9 @@ services:
                 image: "mariadb:10.6.9"
                 container_name: "mariadb"
                 init: true
+                #command: sh #DEBUG
+                #stdin_open: true #DEBUG
+                #tty: true #DEBUG
                 restart: always
                 environment:
                         MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
@@ -33,11 +41,16 @@ services:
                                 ipv4_address: 172.20.0.3
 
         wordpress:
-                depends_on: ["mariadb", "redis"]
+                depends_on:
+                        - "mariadb"
+                        - "redis"
                 build: "requirements/wordpress"
                 image: "wodpress:6.0.2"
                 container_name: "wordpress"
                 init: true
+                #command: sh #DEBUG
+                #stdin_open: true #DEBUG
+                #tty: true #DEBUG
                 restart: always
                 environment:
                         WORDPRESS_DB_HOST: "mariadb"
@@ -63,18 +76,28 @@ services:
                 image: "redis:7.0"
                 container_name: "redis"
                 init: true
+                #command: sh #DEBUG
+                #stdin_open: true #DEBUG
+                #tty: true #DEBUG
                 restart: always
                 networks:
                         myNetwork:
                                 ipv4_address: 172.20.0.5
         ftp:
-                depends_on: ["wordpress"]
+                depends_on:
+                        - "wordpress"
                 build: "requirements/bonus/ftp"
                 image: "ftp:3.0.5"
                 container_name: "ftp"
                 init: true
                 restart: always
-                ports: ["20:20", "21:21", "20100-20110:20100-20110"]
+                #command: sh #DEBUG
+                #stdin_open: true #DEBUG
+                #tty: true #DEBUG
+                ports:
+                        - "20:20"
+                        - "21:21"
+                        - "20100-20110:20100-20110"
                 volumes:
                         - "wordpress:/var/www/wordpress"
 volumes:
