@@ -21,6 +21,8 @@ wp core install --path=/var/www/wordpress \
 
 wp plugin install redis-cache --path=/var/www/wordpress --activate
 
+wp redis enable --path=/var/www/wordpress
+
 mkdir -p /var/log/php-fpm8
 
 chown -R wordpress:wordpress /var/www/wordpress
