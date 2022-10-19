@@ -16,7 +16,6 @@ ADD tools/* .
 ADD conf/* .
 
 RUN chmod +x docker-entrypoint.sh
-
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
 CMD ["mysqld", "--user=mysql", "--init-file=/etc/mysql/init.sql", "--skip-networking=0"]

@@ -14,12 +14,12 @@ RUN wp core download --path=/var/www/wordpress --version=6.0.2
 
 WORKDIR /etc/php8/php-fpm.d
 
+RUN rm -rf *.conf
+
 ADD tools/* .
-
-RUN chmod +x docker-entrypoint.sh && rm -rf *.conf
-
 ADD conf/* .
 
+RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
 CMD ["php-fpm8", "--nodaemonize"]

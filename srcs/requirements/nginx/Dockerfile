@@ -11,11 +11,9 @@ WORKDIR /etc/nginx
 COPY conf/nginx.conf nginx.conf
 
 ADD conf/server.conf.template http.d/
-
 ADD tools/* .
 
 RUN chmod +x docker-entrypoint.sh
-
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
 CMD ["nginx", "-g", "daemon off;"]

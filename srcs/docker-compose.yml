@@ -7,10 +7,10 @@ services:
                 image: "nginx:1.22.0"
                 container_name: "nginx"
                 init: true
+                restart: always
                 #command: sh #DEBUG
                 #stdin_open: true #DEBUG
                 #tty: true #DEBUG
-                restart: always
                 ports:
                         - "443:443"
                 environment:
@@ -25,10 +25,10 @@ services:
                 image: "mariadb:10.6.9"
                 container_name: "mariadb"
                 init: true
+                restart: always
                 #command: sh #DEBUG
                 #stdin_open: true #DEBUG
                 #tty: true #DEBUG
-                restart: always
                 environment:
                         MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
                         MYSQL_USER: "${MYSQL_USER}"
@@ -48,10 +48,10 @@ services:
                 image: "wodpress:6.0.2"
                 container_name: "wordpress"
                 init: true
+                restart: always
                 #command: sh #DEBUG
                 #stdin_open: true #DEBUG
                 #tty: true #DEBUG
-                restart: always
                 environment:
                         WORDPRESS_DB_HOST: "mariadb"
                         WORDPRESS_DB_USER: "${MYSQL_USER}"
@@ -76,10 +76,10 @@ services:
                 image: "redis:7.0"
                 container_name: "redis"
                 init: true
+                restart: always
                 #command: sh #DEBUG
                 #stdin_open: true #DEBUG
                 #tty: true #DEBUG
-                restart: always
                 networks:
                         myNetwork:
                                 ipv4_address: 172.20.0.5

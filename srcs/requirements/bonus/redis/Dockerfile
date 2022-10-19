@@ -8,6 +8,7 @@ EXPOSE 6379
 
 COPY tools/* .
 
+RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
 CMD ["redis-server", "--protected-mode", "no"]

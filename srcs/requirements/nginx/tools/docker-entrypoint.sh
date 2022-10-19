@@ -17,7 +17,5 @@ chown -R nginx:nginx /var/www/wordpress
 envsubst < server.conf.template > server.conf
 
 rm -f server.conf.template default.conf
-
-rm -rf docker-entrypoint.sh
-
+rm -f docker-entrypoint.sh
 exec "$@"

@@ -8,11 +8,12 @@ EXPOSE 20 21 20100-20110
 
 WORKDIR /etc/vsftpd
 
-RUN cp vsftpd.conf vsftpd.conf.back
 RUN mkdir -p /var/log/vsftpd &&  touch /var/log/vsftpd/vsftpd.log
 
 ADD tools/* .
 COPY conf/vsftpd.conf vsftpd.conf
 
+RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]
+
 CMD ["vsftpd", "/etc/vsftpd/vsftpd.conf"]

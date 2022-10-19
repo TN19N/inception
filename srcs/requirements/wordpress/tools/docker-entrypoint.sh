@@ -32,6 +32,5 @@ mkdir -p /var/log/php-fpm8
 
 chown -R wordpress:wordpress /var/www/wordpress
 
-rm -rf  docker-entrypoint.sh
-
+rm -f  docker-entrypoint.sh
 exec "$@"
