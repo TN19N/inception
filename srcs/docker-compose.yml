@@ -97,7 +97,7 @@ services:
                 ports:
                         - "20:20"
                         - "21:21"
-                        - "20100-20110:20100-20110"
+                        - "21000-21010:21000-21010"
                 volumes:
                         - "wordpress:/var/www/wordpress"
 volumes:

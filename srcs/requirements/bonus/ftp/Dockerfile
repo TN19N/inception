@@ -4,7 +4,7 @@ RUN apk update && \
     apk upgrade --no-cach && \
     apk add --no-cach vsftpd=3.0.5-r1
 
-EXPOSE 20 21 20100-20110
+EXPOSE 20 21 21000-21010
 
 WORKDIR /etc/vsftpd
 
