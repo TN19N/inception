@@ -98,6 +98,9 @@ services:
                         - "20:20"
                         - "21:21"
                         - "21000-21010:21000-21010"
+                environment:
+                        FTP_USER_NAME: "${FTP_USER_NAME}"
+                        FTP_USER_PASSWORD: "${FTP_USER_PASSWORD}"
                 volumes:
                         - "wordpress:/var/www/wordpress"
 volumes:
