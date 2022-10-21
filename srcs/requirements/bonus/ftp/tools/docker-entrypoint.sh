@@ -10,6 +10,5 @@ chown -R ${FTP_USER_NAME}:${FTP_USER_NAME} /var/www
 
 echo ${FTP_USER_NAME} > vsftpd.userlist
 
-
 rm -f docker-entrypoint.sh
 exec "$@"
