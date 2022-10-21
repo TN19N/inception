@@ -103,6 +103,21 @@ services:
                         FTP_USER_PASSWORD: "${FTP_USER_PASSWORD}"
                 volumes:
                         - "wordpress:/var/www/wordpress"
+        adminer:
+                depends_on:
+                        - "mariadb"
+                build: "requirements/bonus/adminer"
+                image: "adminer:4.8.1"
+                container_name: "adminer"
+                init: true
+                #command: sh #DEBUG
+                #stdin_open: true #DEBUG
+                #tty: true #DEBUG
+                ports:
+                        - "8080:8080"
+                networks:
+                        myNetwork:
+                                ipv4_address: 172.20.0.6
 volumes:
         db:
                 driver: "local"
