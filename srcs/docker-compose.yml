@@ -110,6 +110,7 @@ services:
                 image: "adminer:4.8.1"
                 container_name: "adminer"
                 init: true
+                restart: always
                 #command: sh #DEBUG
                 #stdin_open: true #DEBUG
                 #tty: true #DEBUG
