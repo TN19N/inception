@@ -19,7 +19,7 @@ services:
                         - "wordpress:/var/www/wordpress"
                 networks:
                         myNetwork:
-                                ipv4_address: 172.20.0.2
+                                ipv4_address: 13.37.0.2
         mariadb:
                 build: "requirements/mariadb"
                 image: "mariadb:10.6.9"
@@ -38,7 +38,7 @@ services:
                         - "db:/var/lib/mysql"
                 networks:
                         myNetwork:
-                                ipv4_address: 172.20.0.3
+                                ipv4_address: 13.37.0.3
         wordpress:
                 depends_on:
                         - "mariadb"
@@ -69,7 +69,7 @@ services:
                         - "wordpress:/var/www/wordpress"
                 networks:
                         myNetwork:
-                                ipv4_address: 172.20.0.4
+                                ipv4_address: 13.37.0.4
         redis:
                 build: "requirements/bonus/redis"
                 image: "redis:7.0"
@@ -81,7 +81,7 @@ services:
                 #tty: true #--DEBUG--
                 networks:
                         myNetwork:
-                                ipv4_address: 172.20.0.5
+                                ipv4_address: 13.37.0.5
         ftp:
                 depends_on:
                         - "wordpress"
@@ -115,7 +115,7 @@ services:
                 #tty: true #--DEBUG--
                 networks:
                         myNetwork:
-                                ipv4_address: 172.20.0.6
+                                ipv4_address: 13.37.0.6
 volumes:
         db:
                 driver: "local"
@@ -134,4 +134,4 @@ networks:
                 driver: "bridge"
                 ipam:
                         config:
-                                - subnet: 172.20.0.0/16
+                                - subnet: 13.37.0.0/28
