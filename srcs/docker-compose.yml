@@ -8,9 +8,9 @@ services:
                 container_name: "nginx"
                 init: true
                 restart: always
-                #command: sh #DEBUG
-                #stdin_open: true #DEBUG
-                #tty: true #DEBUG
+                #command: sh #--DEBUG--
+                #stdin_open: true #--DEBUG--
+                #tty: true #--DEBUG--
                 ports:
                         - "443:443"
                 environment:
@@ -26,9 +26,9 @@ services:
                 container_name: "mariadb"
                 init: true
                 restart: always
-                #command: sh #DEBUG
-                #stdin_open: true #DEBUG
-                #tty: true #DEBUG
+                #command: sh #--DEBUG--
+                #stdin_open: true #--DEBUG--
+                #tty: true #--DEBUG--
                 environment:
                         MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
                         MYSQL_USER: "${MYSQL_USER}"
@@ -39,7 +39,6 @@ services:
                 networks:
                         myNetwork:
                                 ipv4_address: 172.20.0.3
-
         wordpress:
                 depends_on:
                         - "mariadb"
@@ -49,9 +48,9 @@ services:
                 container_name: "wordpress"
                 init: true
                 restart: always
-                #command: sh #DEBUG
-                #stdin_open: true #DEBUG
-                #tty: true #DEBUG
+                #command: sh #--DEBUG--
+                #stdin_open: true #--DEBUG--
+                #tty: true #--DEBUG--
                 environment:
                         WORDPRESS_DB_HOST: "mariadb"
                         WORDPRESS_DB_USER: "${MYSQL_USER}"
@@ -77,9 +76,9 @@ services:
                 container_name: "redis"
                 init: true
                 restart: always
-                #command: sh #DEBUG
-                #stdin_open: true #DEBUG
-                #tty: true #DEBUG
+                #command: sh #--DEBUG--
+                #stdin_open: true #--DEBUG--
+                #tty: true #--DEBUG--
                 networks:
                         myNetwork:
                                 ipv4_address: 172.20.0.5
@@ -91,13 +90,13 @@ services:
                 container_name: "ftp"
                 init: true
                 restart: always
-                #command: sh #DEBUG
-                #stdin_open: true #DEBUG
-                #tty: true #DEBUG
+                #command: sh #--DEBUG--
+                #stdin_open: true #--DEBUG--
+                #tty: true #--DEBUG--
                 ports:
                         - "20:20"
                         - "21:21"
-                        - "21000-21010:21000-21010"
+                        - "21000:21010"
                 environment:
                         FTP_USER_NAME: "${FTP_USER_NAME}"
                         FTP_USER_PASSWORD: "${FTP_USER_PASSWORD}"
@@ -111,11 +110,9 @@ services:
                 container_name: "adminer"
                 init: true
                 restart: always
-                #command: sh #DEBUG
-                #stdin_open: true #DEBUG
-                #tty: true #DEBUG
-                ports:
-                        - "8080:8080"
+                #command: sh #--DEBUG--
+                #stdin_open: true #--DEBUG--
+                #tty: true #--DEBUG--
                 networks:
                         myNetwork:
                                 ipv4_address: 172.20.0.6
