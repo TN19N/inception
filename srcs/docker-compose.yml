@@ -4,7 +4,7 @@ services:
                 depends_on: 
                         - "wordpress"
                 build: "requirements/nginx"
-                image: "nginx:1.22.0"
+                image: "nginx:1.22.1"
                 container_name: "nginx"
                 init: true
                 restart: "unless-stopped"
@@ -22,7 +22,7 @@ services:
                                 ipv4_address: "13.37.0.2"
         mariadb:
                 build: "requirements/mariadb"
-                image: "mariadb:10.6.9"
+                image: "mariadb:10.6.10"
                 container_name: "mariadb"
                 init: true
                 restart: "unless-stopped"
@@ -139,23 +139,26 @@ services:
                         - "/var/run/docker.sock:/var/run/docker.sock"
 volumes:
         db:
+                name: "db"
                 driver: "local"
                 driver_opts:
                         type: "none"
                         o: "bind"
-                        device: "/home/mannouao/data/db"
+                        device: "${HOME}/data/db"
         wordpress:
+                name: "wordpress"
                 driver: "local"
                 driver_opts:
                         type: "none"
                         o: "bind"
-                        device: "/home/mannouao/data/wordpress"
+                        device: "${HOME}/data/wordpress"
         portainerDB:
+                name: "portainerDB"
                 driver: "local"
                 driver_opts:
                         type: "none"
                         o: "bind"
-                        device: "/home/mannouao/data/portainer"
+                        device: "${HOME}/data/portainerDB" 
 networks:
         wordpressNetwork:
                 driver: "bridge"
