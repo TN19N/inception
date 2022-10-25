@@ -4,9 +4,11 @@ all:
 clean:
 	cd srcs && sudo docker compose down
 	sudo docker container prune -f
+fclean: clean
 	sudo docker image prune -af
-restart:
+restart: fclean
 	sudo rm -rf /home/mannouao/data/*
+re: fclean all
 git:
 	sudo git add .
 	sudo git commit -m " back Up "

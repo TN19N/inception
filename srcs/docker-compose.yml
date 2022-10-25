@@ -7,8 +7,8 @@ services:
                 image: "nginx:1.22.0"
                 container_name: "nginx"
                 init: true
-                restart: always
-                #command: sh #--DEBUG--
+                restart: "unless-stopped"
+                #command: "sh" #--DEBUG--
                 #stdin_open: true #--DEBUG--
                 #tty: true #--DEBUG--
                 ports:
@@ -18,15 +18,15 @@ services:
                 volumes:
                         - "wordpress:/var/www/wordpress"
                 networks:
-                        myNetwork:
-                                ipv4_address: 13.37.0.2
+                        wordpressNetwork:
+                                ipv4_address: "13.37.0.2"
         mariadb:
                 build: "requirements/mariadb"
                 image: "mariadb:10.6.9"
                 container_name: "mariadb"
                 init: true
-                restart: always
-                #command: sh #--DEBUG--
+                restart: "unless-stopped"
+                #command: "sh" #--DEBUG--
                 #stdin_open: true #--DEBUG--
                 #tty: true #--DEBUG--
                 environment:
@@ -37,8 +37,8 @@ services:
                 volumes:
                         - "db:/var/lib/mysql"
                 networks:
-                        myNetwork:
-                                ipv4_address: 13.37.0.3
+                        wordpressNetwork:
+                                ipv4_address: "13.37.0.3"
         wordpress:
                 depends_on:
                         - "mariadb"
@@ -47,8 +47,8 @@ services:
                 image: "wodpress:6.0.2"
                 container_name: "wordpress"
                 init: true
-                restart: always
-                #command: sh #--DEBUG--
+                restart: "unless-stopped"
+                #command: "sh" #--DEBUG--
                 #stdin_open: true #--DEBUG--
                 #tty: true #--DEBUG--
                 environment:
@@ -68,20 +68,20 @@ services:
                 volumes:
                         - "wordpress:/var/www/wordpress"
                 networks:
-                        myNetwork:
-                                ipv4_address: 13.37.0.4
+                        wordpressNetwork:
+                                ipv4_address: "13.37.0.4"
         redis:
                 build: "requirements/bonus/redis"
                 image: "redis:7.0"
                 container_name: "redis"
                 init: true
-                restart: always
-                #command: sh #--DEBUG--
+                restart: "unless-stopped"
+                #command: "sh" #--DEBUG--
                 #stdin_open: true #--DEBUG--
                 #tty: true #--DEBUG--
                 networks:
-                        myNetwork:
-                                ipv4_address: 13.37.0.5
+                        wordpressNetwork:
+                                ipv4_address: "13.37.0.5"
         ftp:
                 depends_on:
                         - "wordpress"
@@ -89,19 +89,22 @@ services:
                 image: "ftp:3.0.5"
                 container_name: "ftp"
                 init: true
-                restart: always
-                #command: sh #--DEBUG--
+                restart: "unless-stopped"
+                #command: "sh" #--DEBUG--
                 #stdin_open: true #--DEBUG--
                 #tty: true #--DEBUG--
                 ports:
                         - "20:20"
                         - "21:21"
-                        - "21000:21010"
+                        - "21000-21010:21000-21010"
                 environment:
                         FTP_USER_NAME: "${FTP_USER_NAME}"
                         FTP_USER_PASSWORD: "${FTP_USER_PASSWORD}"
                 volumes:
                         - "wordpress:/var/www/wordpress"
+                networks:
+                        ftpNetwork:
+                                ipv4_address: "13.37.0.18"
         adminer:
                 depends_on:
                         - "mariadb"
@@ -109,13 +112,31 @@ services:
                 image: "adminer:4.8.1"
                 container_name: "adminer"
                 init: true
-                restart: always
-                #command: sh #--DEBUG--
+                restart: "unless-stopped"
+                #command: "sh" #--DEBUG--
                 #stdin_open: true #--DEBUG--
                 #tty: true #--DEBUG--
                 networks:
-                        myNetwork:
-                                ipv4_address: 13.37.0.6
+                        wordpressNetwork:
+                                ipv4_address: "13.37.0.6"
+        portainer:
+                build: "requirements/bonus/portainer"
+                image: "portainer:2.15.1"
+                container_name: "portainer"
+                init: true
+                restart: "unless-stopped"
+                #command: "sh" #--DEBUG--
+                #stdin_open: true #--DEBUG--
+                #tty: true #--DEBUG--
+                ports:
+                        - "9443:9443"
+                        - "8000:8000"
+                networks:
+                        wordpressNetwork:
+                                ipv4_address: "13.37.0.7"
+                volumes:
+                        - "portainerDB:/data"
+                        - "/var/run/docker.sock:/var/run/docker.sock"
 volumes:
         db:
                 driver: "local"
@@ -129,9 +150,20 @@ volumes:
                         type: "none"
                         o: "bind"
                         device: "/home/mannouao/data/wordpress"
+        portainerDB:
+                driver: "local"
+                driver_opts:
+                        type: "none"
+                        o: "bind"
+                        device: "/home/mannouao/data/portainer"
 networks:
-        myNetwork:
+        wordpressNetwork:
                 driver: "bridge"
                 ipam:
                         config:
-                                - subnet: 13.37.0.0/28
+                                - subnet: "13.37.0.0/28"
+        ftpNetwork:
+                driver: "bridge"
+                ipam:
+                        config:
+                                - subnet: "13.37.0.16/30" 
