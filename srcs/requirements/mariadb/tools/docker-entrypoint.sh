@@ -1,7 +1,6 @@
 #!/bin/sh
-set -e
+set -xe
 
 envsubst < init.sql.template > init.sql
 
-rm -rf init.sql.template docker-entrypoint.sh
 exec "$@"

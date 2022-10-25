@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -xe
 
 wp config create --path=/var/www/wordpress \
         --dbname="${WORDPRESS_DB_NAME}" \
@@ -11,20 +11,30 @@ wp config create --path=/var/www/wordpress \
 define('WP_REDIS_HOST', 'redis');
 EOF
 
-wp core install --path=/var/www/wordpress \
-	--url="${WORDPRESS_SITE_NAME}" \
-	--title="${WORDPRESS_SITE_TITLE}" \
-	--admin_user="${WORDPRESS_ADMIN_NAME}" \
-	--admin_password="${WORDPRESS_ADMIN_PASSWORD}" \
-	--admin_email="${WORDPRESS_ADMIN_EMAIL}" \
-	--skip-email
+if ! wp core is-installed --path=/var/www/wordpress; then
+	wp core install --path=/var/www/wordpress \
+		--url="${WORDPRESS_SITE_NAME}" \
+		--title="${WORDPRESS_SITE_TITLE}" \
+		--admin_user="${WORDPRESS_ADMIN_NAME}" \
+		--admin_password="${WORDPRESS_ADMIN_PASSWORD}" \
+		--admin_email="${WORDPRESS_ADMIN_EMAIL}" \
+		--skip-email
+fi
 
-wp user create --path=/var/www/wordpress \
-       	${WORDPRESS_USER_NAME} ${WORDPRESS_USER_EMAIL}\
-	--role=${WORDPRESS_USER_ROLE} \
-	--user_pass=${WORDPRESS_USER_PASSWORD}
+if ! wp user get ${WORDPRESS_USER_NAME} --path=/var/www/wordpress; then
+	wp user create --path=/var/www/wordpress \
+       		${WORDPRESS_USER_NAME} ${WORDPRESS_USER_EMAIL}\
+		--role=${WORDPRESS_USER_ROLE} \
+		--user_pass=${WORDPRESS_USER_PASSWORD}
+fi
 
-wp plugin install redis-cache --path=/var/www/wordpress --activate
+if ! wp plugin is-installed redis-cache --path=/var/www/wordpress; then
+	wp plugin install redis-cache --path=/var/www/wordpress
+fi
+
+if ! wp plugin is-active redis-cache --path=/var/www/wordpress; then
+	wp plugin activate redis-cache --path=/var/www/wordpress
+fi
 
 wp redis enable --path=/var/www/wordpress
 
@@ -32,5 +42,4 @@ mkdir -p /var/log/php-fpm8
 
 chown -R wordpress:wordpress /var/www/wordpress
 
-rm -f  docker-entrypoint.sh
 exec "$@"

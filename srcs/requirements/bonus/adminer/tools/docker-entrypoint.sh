@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
+set -xe
 
-rm -f docker-entrypoint.sh
 exec "$@"

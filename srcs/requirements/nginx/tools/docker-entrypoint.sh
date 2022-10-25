@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -ex
 
 mkdir -p certs
 
@@ -16,6 +16,5 @@ chown -R nginx:nginx /var/www/wordpress
 
 envsubst < server.conf.template > server.conf
 
-rm -f *.template default.conf
-rm -f docker-entrypoint.sh
+rm -f default.conf
 exec "$@"
