@@ -132,8 +132,8 @@ services:
                         - "9443:9443"
                         - "8000:8000"
                 networks:
-                        wordpressNetwork:
-                                ipv4_address: "13.37.0.7"
+                        portainerNetwork:
+                                ipv4_address: "13.37.0.22"
                 volumes:
                         - "portainerDB:/data"
                         - "/var/run/docker.sock:/var/run/docker.sock"
@@ -169,4 +169,9 @@ networks:
                 driver: "bridge"
                 ipam:
                         config:
-                                - subnet: "13.37.0.16/30" 
+                                - subnet: "13.37.0.16/30"
+        portainerNetwork:
+                driver: "bridge"
+                ipam:
+                        config:
+                                - subnet: "13.37.0.20/30"
