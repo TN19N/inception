@@ -161,16 +161,19 @@ volumes:
                         device: "${HOME}/data/portainerDB" 
 networks:
         wordpressNetwork:
+                name: "wordpressNetwork"
                 driver: "bridge"
                 ipam:
                         config:
                                 - subnet: "13.37.0.0/28"
         ftpNetwork:
+                name: "ftpNetwork"
                 driver: "bridge"
                 ipam:
                         config:
                                 - subnet: "13.37.0.16/30"
         portainerNetwork:
+                name: "portainerNetwork"
                 driver: "bridge"
                 ipam:
                         config:
