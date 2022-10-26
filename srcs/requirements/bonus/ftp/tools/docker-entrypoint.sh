@@ -1,7 +1,7 @@
 #!/bin/sh
 set -xe
 
-if ! id ${FTP_USER_NAME}; then
+if ! id -u ${FTP_USER_NAME}; then
 	adduser -h /var/www ${FTP_USER_NAME} << EOF
 ${FTP_USER_PASSWORD}
 ${FTP_USER_PASSWORD}
