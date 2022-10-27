@@ -12,7 +12,7 @@ RUN wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1
 #ADD conf/* . 
 ADD tools/* .
 
-RUN chmod +x index.php docker-entrypoint.sh
+RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
 CMD ["php", "-S", "0.0.0.0:8080", "-t","/var/www/"]

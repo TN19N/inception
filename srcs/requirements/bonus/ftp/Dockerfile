@@ -9,7 +9,6 @@ EXPOSE 20 21 21000-21010
 WORKDIR /etc/vsftpd
 
 RUN mkdir -p /var/log/vsftpd && touch /var/log/vsftpd/vsftpd.log
-RUN touch vsftpd.userlist
 
 ADD tools/* .
 COPY conf/vsftpd.conf vsftpd.conf
