@@ -9,9 +9,7 @@ EXPOSE 8080
 RUN mkdir -p /var/www
 WORKDIR /var/www
 
-RUN wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -O index.php
-
-#ADD conf/* . 
+ADD portfolio/ .
 ADD tools/* .
 
 RUN chmod +x docker-entrypoint.sh

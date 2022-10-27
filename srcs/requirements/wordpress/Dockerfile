@@ -16,8 +16,8 @@ WORKDIR /etc/php8/php-fpm.d
 
 RUN rm -rf *.conf
 
-ADD tools/* .
-ADD conf/* .
+ADD tools/ .
+ADD conf/ .
 
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]

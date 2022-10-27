@@ -13,8 +13,12 @@ server {
 		try_files ${DOLLAR}uri ${DOLLAR}uri/ /index.php?${DOLLAR}args;
 	}
 
-	location /adminer {
-                proxy_pass http://adminer:8080;
+	location /adminer/ {
+                proxy_pass http://adminer:8080/;
+        }
+
+	location /portfolio/ {
+                proxy_pass http://portfolio:8080/;
         }
 
 	location ~ \.php${DOLLAR} {

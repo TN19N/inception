@@ -119,6 +119,15 @@ services:
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.6"
+        portfolio:
+                build: "requirements/bonus/portfolio"
+                image: "portfolio:mannouao"
+                container_name: "portfolio"
+                init: true
+                restart: "unless-stopped"
+                networks:
+                        wordpressNetwork:
+                                ipv4_address: "13.37.0.7"
         portainer:
                 build: "requirements/bonus/portainer"
                 image: "portainer:2.15.1"
