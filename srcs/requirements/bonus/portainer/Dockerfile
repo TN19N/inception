@@ -11,7 +11,6 @@ RUN wget https://github.com/portainer/portainer/releases/download/2.15.1/portain
 
 WORKDIR portainer
 
-ADD conf/ .
 ADD tools/ .
 
 RUN chmod +x docker-entrypoint.sh
