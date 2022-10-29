@@ -25,6 +25,6 @@ restart: fclean
 	docker system prune -af --volumes
 	sudo rm -rf ${HOME}/data/*
 git:
-	git add .
-	git commit -m " back Up "
-	git push
+	sudo git add .
+	sudo git commit -m " back Up "
+	sudo git push
