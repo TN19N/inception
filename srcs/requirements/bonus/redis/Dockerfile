@@ -6,8 +6,8 @@ RUN apk update && \
 
 EXPOSE 6379
 
-#ADD conf/* .
-ADD tools/* .
+ADD conf/ .
+ADD tools/ .
 
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]

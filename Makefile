@@ -1,15 +1,27 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mannouao <mannouao@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/10/28 16:50:29 by mannouao          #+#    #+#              #
+#    Updated: 2022/10/28 16:57:20 by mannouao         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 all:
 	sudo mkdir -p ${HOME}/data/db \
 	              ${HOME}/data/wordpress \
 		      ${HOME}/data/portainerDB
-	cd srcs && sudo docker compose up --build -d
+	cd srcs && docker compose up --build -d
 clean:
-	cd srcs && sudo docker compose down
+	cd srcs && docker compose down
 fclean: clean
-	sudo docker container prune -f
-	sudo docker image prune -af
+	docker container prune -f
+	docker image prune -af
 restart: fclean
-	sudo docker system prune -af --volumes
+	docker system prune -af --volumes
 	sudo rm -rf ${HOME}/data/*
 git:
 	sudo git add .

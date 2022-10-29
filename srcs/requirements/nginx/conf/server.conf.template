@@ -17,13 +17,16 @@ server {
                 proxy_pass http://adminer:8080/;
         }
 
+	location /portainer/ {
+		proxy_pass http://portainer:9000/;
+	}
+
 	location /portfolio/ {
                 proxy_pass http://portfolio:8080/;
         }
 
 	location ~ \.php${DOLLAR} {
-		include /etc/nginx/fastcgi_params;
+		include /etc/nginx/fastcgi.conf;
         	fastcgi_pass wordpress:9000;
-        	fastcgi_param SCRIPT_FILENAME ${DOLLAR}document_root${DOLLAR}fastcgi_script_name;
 	}
 }

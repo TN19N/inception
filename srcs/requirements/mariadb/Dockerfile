@@ -12,8 +12,8 @@ WORKDIR /etc/mysql
 
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
 
-ADD tools/* .
-ADD conf/* .
+ADD tools/ .
+ADD conf/ .
 
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]

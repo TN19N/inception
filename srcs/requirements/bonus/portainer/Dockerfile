@@ -3,7 +3,7 @@ FROM alpine:3.16.2
 RUN apk update && \
     apk upgrade --no-cache
 
-EXPOSE 8000 9443
+EXPOSE 9000
 
 WORKDIR /etc
 
@@ -11,8 +11,8 @@ RUN wget https://github.com/portainer/portainer/releases/download/2.15.1/portain
 
 WORKDIR portainer
 
-#ADD conf/* .
-ADD tools/* .
+ADD conf/ .
+ADD tools/ .
 
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]

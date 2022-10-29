@@ -96,7 +96,7 @@ services:
                 ports:
                         - "20:20"
                         - "21:21"
-                        - "21000-21010:21000-21010"
+                        - "20000-21000:20000-21000"
                 environment:
                         FTP_USER_NAME: "${FTP_USER_NAME}"
                         FTP_USER_PASSWORD: "${FTP_USER_PASSWORD}"
@@ -125,6 +125,9 @@ services:
                 container_name: "portfolio"
                 init: true
                 restart: "unless-stopped"
+                #command: "sh" #--DEBUG--
+                #stdin_open: true #--DEBUG--
+                #tty: true #--DEBUG--
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.7"
@@ -137,12 +140,9 @@ services:
                 #command: "sh" #--DEBUG--
                 #stdin_open: true #--DEBUG--
                 #tty: true #--DEBUG--
-                ports:
-                        - "9443:9443"
-                        - "8000:8000"
                 networks:
-                        portainerNetwork:
-                                ipv4_address: "13.37.0.22"
+                        wordpressNetwork:
+                                ipv4_address: "13.37.0.8"
                 volumes:
                         - "portainerDB:/data"
                         - "/var/run/docker.sock:/var/run/docker.sock"
@@ -181,9 +181,3 @@ networks:
                 ipam:
                         config:
                                 - subnet: "13.37.0.16/30"
-        portainerNetwork:
-                name: "portainerNetwork"
-                driver: "bridge"
-                ipam:
-                        config:
-                                - subnet: "13.37.0.20/30"

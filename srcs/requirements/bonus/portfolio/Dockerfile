@@ -10,7 +10,7 @@ RUN mkdir -p /var/www
 WORKDIR /var/www
 
 ADD portfolio/ .
-ADD tools/* .
+ADD tools/ .
 
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]
