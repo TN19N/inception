@@ -96,7 +96,7 @@ services:
                 ports:
                         - "20:20"
                         - "21:21"
-                        - "20000-21000:20000-21000"
+                        - "20000-20010:20000-20010"
                 environment:
                         FTP_USER_NAME: "${FTP_USER_NAME}"
                         FTP_USER_PASSWORD: "${FTP_USER_PASSWORD}"
