@@ -90,9 +90,9 @@ services:
                 container_name: "ftp"
                 init: true
                 restart: "unless-stopped"
-                #command: "sh" #--DEBUG--
-                #stdin_open: true #--DEBUG--
-                #tty: true #--DEBUG--
+                command: "sh" #--DEBUG--
+                stdin_open: true #--DEBUG--
+                tty: true #--DEBUG--
                 ports:
                         - "20:20"
                         - "21:21"

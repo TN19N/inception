@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 #!/bin/sh
+set -xe
 
 wp config create --path=/var/www/wordpress \
         --dbname="${WORDPRESS_DB_NAME}" \
