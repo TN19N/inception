@@ -22,6 +22,4 @@ fi
 
 chmod 777 -R /var/www/wordpress
 
-echo ${FTP_USER_NAME} > vsftpd.userlist
-
 exec "$@"
