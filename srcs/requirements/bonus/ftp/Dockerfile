@@ -4,14 +4,14 @@ RUN apk update && \
     apk upgrade --no-cach && \
     apk add --no-cach vsftpd=3.0.5-r1 lftp
 
-EXPOSE 20 21 20000-20010
+EXPOSE 21 20 20000-20010
 
 WORKDIR /etc/vsftpd
 
-RUN mkdir -p /var/log/vsftpd && touch /var/log/vsftpd/vsftpd.log
+RUN mkdir -p /var/log/vsftpd/ && touch /var/log/vsftpd/vsftpd.log
 
-ADD tools/ .
 COPY conf/vsftpd.conf vsftpd.conf
+ADD tools/ .
 
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]
