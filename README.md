@@ -13,4 +13,18 @@ https://docs.docker.com/engine/install/linux-postinstall/ --> run docker without
 <p>Note: make sure that your domain name pointing to your localhost in your /etc/hosts !!</p>
 
 # Diagram
+
 <img src="https://github.com/Mustapha-Nawawi-T/inception/blob/main/img/dgr.png?raw=true"/>
+
+# Services
+
+<ul>
+  <li>wordpress</li>
+  <li>mariadb</li>
+  <li>nginx</li>
+  <li>adminer</li>
+  <li>ftp</li>
+  <li>portainer</li>
+  <li>portfolio</li>
+  <li>redis</li>
+</ul>
