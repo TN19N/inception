@@ -8,7 +8,7 @@ https://docs.docker.com/engine/install/linux-postinstall/ --> run docker without
 
 # Configuration
 
-<img src="" />
+<img src="https://github.com/Mustapha-Nawawi-T/inception/blob/main/img/cofig.png?raw=true" />
 <p>Edit the file as you like :)</p>
 <p>Note: make sure that your domain name pointing to your localhost in your /etc/hosts !!</p>
 
