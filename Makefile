@@ -14,7 +14,7 @@ all:
 	sudo mkdir -p ${HOME}/data/db \
 	              ${HOME}/data/wordpress \
 		      ${HOME}/data/portainerDB
-	cd srcs && docker-compose up --build -d
+	cd srcs && docker-compose up
 clean:
 	cd srcs && docker-compose down
 fclean: clean
