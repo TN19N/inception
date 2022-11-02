@@ -14,7 +14,7 @@
 set -xe
 
 wp config create --path=/var/www/wordpress \
-        --dbname="${WORDPRESS_DB_NAME}" \
+    --dbname="${WORDPRESS_DB_NAME}" \
 	--dbuser="${WORDPRESS_DB_USER}" \
 	--dbpass="${WORDPRESS_DB_PASSWORD}" \
 	--dbhost="${WORDPRESS_DB_HOST}" \
