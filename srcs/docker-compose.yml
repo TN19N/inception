@@ -8,9 +8,6 @@ services:
                 container_name: "nginx"
                 init: true
                 restart: "unless-stopped"
-                #command: "sh" #--DEBUG--
-                #stdin_open: true #--DEBUG--
-                #tty: true #--DEBUG--
                 ports:
                         - "443:443"
                 environment:
@@ -26,9 +23,6 @@ services:
                 container_name: "mariadb"
                 init: true
                 restart: "unless-stopped"
-                #command: "sh" #--DEBUG--
-                #stdin_open: true #--DEBUG--
-                #tty: true #--DEBUG--
                 environment:
                         MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
                         MYSQL_USER: "${MYSQL_USER}"
@@ -48,9 +42,6 @@ services:
                 container_name: "wordpress"
                 init: true
                 restart: "unless-stopped"
-                #command: "sh" #--DEBUG--
-                #stdin_open: true #--DEBUG--
-                #tty: true #--DEBUG--
                 environment:
                         WORDPRESS_DB_HOST: "mariadb"
                         WORDPRESS_DB_USER: "${MYSQL_USER}"
@@ -76,9 +67,6 @@ services:
                 container_name: "redis"
                 init: true
                 restart: "unless-stopped"
-                #command: "sh" #--DEBUG--
-                #stdin_open: true #--DEBUG--
-                #tty: true #--DEBUG--
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.5"
@@ -90,9 +78,6 @@ services:
                 container_name: "ftp"
                 init: true
                 restart: "unless-stopped"
-                #command: "sh" #--DEBUG--
-                #stdin_open: true #--DEBUG--
-                #tty: true #--DEBUG--
                 ports:
                         - "20:20"
                         - "21:21"
@@ -113,9 +98,6 @@ services:
                 container_name: "adminer"
                 init: true
                 restart: "unless-stopped"
-                #command: "sh" #--DEBUG--
-                #stdin_open: true #--DEBUG--
-                #tty: true #--DEBUG--
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.6"
@@ -125,22 +107,15 @@ services:
                 container_name: "portfolio"
                 init: true
                 restart: "unless-stopped"
-                #command: "sh" #--DEBUG--
-                #stdin_open: true #--DEBUG--
-                #tty: true #--DEBUG-- 
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.7"
-
         portainer:
                 build: "requirements/bonus/portainer"
                 image: "portainer:2.15.1"
                 container_name: "portainer"
                 init: true
                 restart: "unless-stopped"
-                #command: "sh" #--DEBUG--
-                #stdin_open: true #--DEBUG--
-                #tty: true #--DEBUG--
                 ports:
                         - "9443:9443"
                         - "8000:8000"
@@ -171,7 +146,7 @@ volumes:
                 driver_opts:
                         type: "none"
                         o: "bind"
-                        device: "${HOME}/data/portainerDB" 
+                        device: "${HOME}/data/portainerDB"
 networks:
         wordpressNetwork:
                 name: "wordpressNetwork"

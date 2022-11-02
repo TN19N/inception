@@ -15,14 +15,18 @@ all:
 	              ${HOME}/data/wordpress \
 		      ${HOME}/data/portainerDB
 	cd srcs && docker-compose up
+
 clean:
 	cd srcs && docker-compose down
+
 fclean: clean
 	docker container prune -f
 	docker image prune -af
+
 restart: fclean
 	docker system prune -af --volumes
 	sudo rm -rf ${HOME}/data/*
+
 git:
 	git add .
 	git commit -m " back Up "
