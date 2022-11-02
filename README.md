@@ -23,8 +23,8 @@ https://docs.docker.com/engine/install/linux-postinstall/ --> run docker without
   <li>mariadb</li>
   <li>nginx</li>
   <li>adminer</li>
-  <li>ftp</li>
+  <li>ftp (vsftpd)</li>
   <li>portainer</li>
-  <li>portfolio</li>
+  <li>portfolio (html + css + javaScript)</li>
   <li>redis</li>
 </ul>
