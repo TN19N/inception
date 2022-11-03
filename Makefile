@@ -25,7 +25,7 @@ fclean: clean
 
 restart: fclean
 	docker system prune -af --volumes
-	sudo rm -rf ${HOME}/data/*
+	sudo rm -rf ${HOME}/data/db ${HOME}/data/wordpress ${HOME}/data/portainerDB
 
 git:
 	git add .

@@ -2,7 +2,7 @@ FROM alpine:3.16.2
 
 RUN apk update && \
     apk upgrade --no-cache && \
-    apk add --no-cache mariadb=10.6.10-r0 gettext
+    apk add --no-cache mariadb gettext
 
 EXPOSE 3306
 

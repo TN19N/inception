@@ -10,7 +10,7 @@ EXPOSE 9000
 RUN addgroup -S wordpress && adduser -S wordpress -G wordpress
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 RUN mkdir -p /var/www/wordpress
-RUN wp core download --path=/var/www/wordpress --version=6.0.3
+RUN wp core download --path=/var/www/wordpress
 
 WORKDIR /etc/php8/php-fpm.d
 
