@@ -38,7 +38,7 @@ services:
                         - "mariadb"
                         - "redis"
                 build: "requirements/wordpress"
-                image: "wodpress:6.0.3"
+                image: "wordpress:6.0.3"
                 container_name: "wordpress"
                 init: true
                 restart: "unless-stopped"
