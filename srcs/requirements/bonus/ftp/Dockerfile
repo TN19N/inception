@@ -2,7 +2,7 @@ FROM alpine:3.16.2
 
 RUN apk update && \
     apk upgrade --no-cach && \
-    apk add --no-cach vsftpd lftp
+    apk add --no-cach vsftpd
 
 EXPOSE 21 20 20000-20010
 
