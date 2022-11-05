@@ -46,7 +46,6 @@ FTP_USER_NAME="Mustapha"
 FTP_USER_PASSWORD="SqQ59q417Tdb"
 ```
 <p>Edit the file as you like :)</p>
-<p>Note: make sure that your domain name pointing to your localhost in your /etc/hosts !!</p>
 
 # Diagram
 
