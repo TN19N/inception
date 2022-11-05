@@ -24,8 +24,6 @@ cd http.d
 
 export DOLLAR='$'
 
-chown -R nginx:nginx /var/www/wordpress
-
 envsubst < server.conf.template > server.conf
 
 rm -f default.conf

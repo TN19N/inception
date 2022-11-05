@@ -1,16 +1,24 @@
 FROM alpine:3.16.2
 
-RUN apk update && \
-    apk upgrade --no-cach && \
-    apk add --no-cach php8 php8-session php8-mysqli
+ARG UID GID
+
+RUN addgroup -g $GID portfolio && adduser -D -u $UID -G portfolio portfolio \
+    && apk update \
+    && apk upgrade --no-cache \
+    && apk add --no-cache sudo php8 php8-session php8-mysqli \
+    && echo portfolio ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/portfolio
+
+USER portfolio
 
 EXPOSE 8080
 
-RUN mkdir -p /var/www
-WORKDIR /var/www
+WORKDIR /var/www/html
 
 ADD portfolio/ .
 ADD tools/ .
+
+RUN sudo chown -R portfolio:portfolio /var/www/html \
+    && chmod +x docker-entrypoint.sh
 
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]

@@ -11,9 +11,7 @@
 # **************************************************************************** #
 
 all:
-	sudo mkdir -p ${HOME}/data/db \
-	              ${HOME}/data/wordpress \
-		      ${HOME}/data/portainerDB
+	sh ./srcs/requirements/tools/init.sh
 	cd srcs && docker-compose up -d --build
 
 clean:
@@ -25,7 +23,7 @@ fclean: clean
 
 restart: fclean
 	docker system prune -af --volumes
-	sudo rm -rf ${HOME}/data/db ${HOME}/data/wordpress ${HOME}/data/portainerDB
+	rm -rf ${HOME}/data/db ${HOME}/data/wordpress ${HOME}/data/portainerDB
 
 git:
 	git add .

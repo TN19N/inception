@@ -1,19 +1,26 @@
 FROM alpine:3.16.2
 
-RUN apk update && \
-    apk upgrade --no-cach && \
-    apk add --no-cach php8 php8-session php8-mysqli
+ARG UID GID
+
+RUN addgroup -g $GID adminer && adduser -D -u $UID -G adminer adminer \
+    && apk update \
+    && apk upgrade --no-cache \
+    && apk add --no-cache sudo php8 php8-session php8-mysqli \
+    && echo adminer ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/adminer
+
+USER adminer
 
 EXPOSE 8080
 
-RUN mkdir -p /var/www
-WORKDIR /var/www
+WORKDIR /etc/adminer
 
-RUN wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -O index.php
+RUN sudo wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -O index.php
 
 ADD tools/ .
 
-RUN chmod +x docker-entrypoint.sh
+RUN sudo chown -R adminer:adminer /etc/adminer \
+    && chmod +x docker-entrypoint.sh
+
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
-CMD ["php", "-S", "0.0.0.0:8080", "-t","/var/www/"]
+CMD ["php", "-S", "0.0.0.0:8080", "-t","/etc/adminer/"]

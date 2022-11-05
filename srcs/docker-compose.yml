@@ -2,12 +2,19 @@ version: "3.9"
 services:
         nginx:
                 depends_on: 
-                        - "wordpress"
-                build: "requirements/nginx"
+                       - "wordpress"
+                build: 
+                        context: "./requirements/nginx"
+                        args:
+                                UID: "${UID}"
+                                GID: "${GID}"
                 image: "nginx:1.22.1"
                 container_name: "nginx"
                 init: true
                 restart: "unless-stopped"
+                # command: sh # -- DUBUG --
+                # stdin_open: true # -- DUBUG --
+                # tty: true # -- DUBUG --
                 ports:
                         - "443:443"
                 environment:
@@ -18,11 +25,18 @@ services:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.2"
         mariadb:
-                build: "requirements/mariadb"
+                build: 
+                        context: "./requirements/mariadb"
+                        args:
+                                UID: "${UID}"
+                                GID: "${GID}"
                 image: "mariadb:10.6.10"
                 container_name: "mariadb"
                 init: true
                 restart: "unless-stopped"
+                # command: sh # -- DUBUG --
+                # stdin_open: true # -- DUBUG --
+                # tty: true # -- DUBUG --
                 environment:
                         MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
                         MYSQL_USER: "${MYSQL_USER}"
@@ -37,11 +51,18 @@ services:
                 depends_on:
                         - "mariadb"
                         - "redis"
-                build: "requirements/wordpress"
+                build: 
+                        context: "./requirements/wordpress"
+                        args:
+                                UID: "${UID}"
+                                GID: "${GID}"
                 image: "wordpress:6.0.3"
                 container_name: "wordpress"
                 init: true
                 restart: "unless-stopped"
+                # command: sh # -- DUBUG --
+                # stdin_open: true # -- DUBUG --
+                # tty: true # -- DUBUG --
                 environment:
                         WORDPRESS_DB_HOST: "mariadb"
                         WORDPRESS_DB_USER: "${MYSQL_USER}"
@@ -62,29 +83,42 @@ services:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.4"
         redis:
-                build: "requirements/bonus/redis"
+                build: 
+                        context: "./requirements/bonus/redis"
+                        args:
+                                UID: "${UID}"
+                                GID: "${GID}"
                 image: "redis:7.0"
                 container_name: "redis"
                 init: true
                 restart: "unless-stopped"
+                # command: sh # -- DUBUG --
+                # stdin_open: true # -- DUBUG --
+                # tty: true # -- DUBUG --
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.5"
         ftp:
                 depends_on:
                         - "wordpress"
-                build: "requirements/bonus/ftp"
+                build: 
+                        context: "./requirements/bonus/ftp"
+                        args:
+                                UID: "${UID}"
+                                GID: "${GID}"
+                                FTP_USER_NAME: "${FTP_USER_NAME:-ftp}"
+                                FTP_USER_PASSWORD: "${FTP_USER_PASSWORD:-password}"
                 image: "ftp:3.0.5"
                 container_name: "ftp"
                 init: true
                 restart: "unless-stopped"
+                # command: sh # -- DUBUG --
+                # stdin_open: true # -- DUBUG --
+                # tty: true # -- DUBUG --
                 ports:
                         - "20:20"
                         - "21:21"
                         - "20000-20010:20000-20010"
-                environment:
-                        FTP_USER_NAME: "${FTP_USER_NAME}"
-                        FTP_USER_PASSWORD: "${FTP_USER_PASSWORD}"
                 volumes:
                         - "wordpress:/var/www/wordpress"
                 networks:
@@ -93,29 +127,51 @@ services:
         adminer:
                 depends_on:
                         - "mariadb"
-                build: "requirements/bonus/adminer"
+                build: 
+                        context: "./requirements/bonus/adminer"
+                        args:
+                                UID: "${UID}"
+                                GID: "${GID}"
                 image: "adminer:4.8.1"
                 container_name: "adminer"
                 init: true
                 restart: "unless-stopped"
+                # command: sh # -- DUBUG --
+                # stdin_open: true # -- DUBUG --
+                # tty: true # -- DUBUG --
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.6"
         portfolio:
-                build: "requirements/bonus/portfolio"
+                build: 
+                        context: "./requirements/bonus/portfolio"
+                        args:
+                                UID: "${UID}"
+                                GID: "${GID}"
                 image: "portfolio:mannouao"
                 container_name: "portfolio"
                 init: true
                 restart: "unless-stopped"
+                # command: sh # -- DUBUG --
+                # stdin_open: true # -- DUBUG --
+                # tty: true # -- DUBUG --
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.7"
         portainer:
-                build: "requirements/bonus/portainer"
+                build: 
+                        context: "./requirements/bonus/portainer"
+                        args:
+                                UID: "${UID}"
+                                GID: "${GID}"
+                                DGID: "${DGID}"
                 image: "portainer:2.15.1"
                 container_name: "portainer"
                 init: true
                 restart: "unless-stopped"
+                # command: sh # -- DUBUG --
+                # stdin_open: true # -- DUBUG --
+                # tty: true # -- DUBUG --
                 ports:
                         - "9443:9443"
                         - "8000:8000"

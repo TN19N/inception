@@ -13,12 +13,4 @@
 #!/bin/sh
 set -xe
 
-if ! id -u ${FTP_USER_NAME}; then
-	adduser -h /var/www/wordpress -D ${FTP_USER_NAME}
-	echo "$FTP_USER_NAME:$FTP_USER_PASSWORD" | chpasswd
-fi
-
-chmod -R o+rw /var/www/wordpress
-echo ${FTP_USER_NAME} > vsftpd.userlist
-
 exec "$@"

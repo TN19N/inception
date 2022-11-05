@@ -12,6 +12,15 @@ https://docs.docker.com/engine/install/linux-postinstall/ --> run docker without
 ### DOMAIN NAME
 DOMAIN_NAME="mannouao.42.fr"
 
+### USER ID 
+UID="1000"
+
+### GROUP ID
+GID="1000"
+
+### DOCKER GROUP ID
+DGID="997"
+
 ### MYSQL SETUP
 MYSQL_ROOT_PASSWORD="azVW36D4FkErhe"
 MYSQL_DATABASE="wordpressdb"
@@ -35,7 +44,6 @@ WORDPRESS_USER_ROLE="author"
 ### FTP SETUP
 FTP_USER_NAME="Mustapha"
 FTP_USER_PASSWORD="SqQ59q417Tdb"
-
 ```
 <p>Edit the file as you like :)</p>
 <p>Note: make sure that your domain name pointing to your localhost in your /etc/hosts !!</p>

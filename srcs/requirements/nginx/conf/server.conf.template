@@ -14,15 +14,15 @@ server {
 	}
 
 	location /adminer/ {
-                proxy_pass http://adminer:8080/;
-        }
+        proxy_pass http://adminer:8080/;
+    }
 
 	location /portfolio/ {
-                proxy_pass http://portfolio:8080/;
-        }
+        proxy_pass http://portfolio:8080/;
+    }
 
 	location ~ \.php${DOLLAR} {
 		include /etc/nginx/fastcgi.conf;
-        	fastcgi_pass wordpress:9000;
+        fastcgi_pass wordpress:9000;
 	}
 }

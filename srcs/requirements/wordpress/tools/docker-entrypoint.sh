@@ -50,8 +50,4 @@ fi
 
 wp redis enable --path=/var/www/wordpress
 
-mkdir -p /var/log/php-fpm8
-
-chown -R wordpress:wordpress /var/www/wordpress
-
 exec "$@"

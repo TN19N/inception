@@ -13,6 +13,7 @@
 #!/bin/sh
 set -xe
 
+mysql_install_db --user=mysql --datadir=/var/lib/mysql
 envsubst < init.sql.template > init.sql
 
-exec "$@"
+exec "$@"c
