@@ -9,11 +9,11 @@ WORKDIR /etc
 
 RUN wget https://github.com/portainer/portainer/releases/download/2.15.1/portainer-2.15.1-linux-amd64.tar.gz && tar xvf portainer-2.15.1-linux-amd64.tar.gz && rm portainer-2.15.1-linux-amd64.tar.gz 
 
-WORKDIR portainer
+WORKDIR /etc/portainer
 
 ADD tools/ .
 
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
-CMD ["./portainer", "--assets", "."]
+CMD ["./portainer", "--assets", "/etc/portainer"]

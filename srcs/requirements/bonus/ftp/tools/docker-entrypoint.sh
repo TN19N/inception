@@ -18,6 +18,7 @@ if ! id -u ${FTP_USER_NAME}; then
 	echo "$FTP_USER_NAME:$FTP_USER_PASSWORD" | chpasswd
 fi
 
+chmod -R o+rw /var/www/wordpress
 echo ${FTP_USER_NAME} > vsftpd.userlist
 
 exec "$@"
