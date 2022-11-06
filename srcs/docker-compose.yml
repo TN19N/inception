@@ -106,8 +106,8 @@ services:
                         args:
                                 UID: "${UID}"
                                 GID: "${GID}"
-                                FTP_USER_NAME: "${FTP_USER_NAME:-ftp}"
-                                FTP_USER_PASSWORD: "${FTP_USER_PASSWORD:-password}"
+                                FTP_USER_NAME: "${FTP_USER_NAME}"
+                                FTP_USER_PASSWORD: "${FTP_USER_PASSWORD}"
                 image: "ftp:3.0.5"
                 container_name: "ftp"
                 init: true
