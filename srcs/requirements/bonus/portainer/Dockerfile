@@ -3,7 +3,8 @@ FROM alpine:3.16.2
 ARG UID GID DGID
 
 RUN addgroup -g $GID portainer &&  addgroup -g $DGID docker \
-    && adduser -D -u $UID -G portainer -G docker portainer \
+    && adduser -D -u $UID -G portainer portainer \
+    && adduser portainer docker \
     && apk update \
     && apk upgrade --no-cache \
     && apk add --no-cache sudo \

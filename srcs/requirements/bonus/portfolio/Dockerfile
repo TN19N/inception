@@ -23,4 +23,4 @@ RUN sudo chown -R portfolio:portfolio /var/www/html \
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]
 
-CMD ["php", "-S", "0.0.0.0:8080", "-t","/var/www/"]
+CMD ["php", "-S", "0.0.0.0:8080", "-t","/var/www/html"]
