@@ -12,9 +12,6 @@ services:
                 container_name: "nginx"
                 init: true
                 restart: "unless-stopped"
-                # command: sh # -- DUBUG --
-                # stdin_open: true # -- DUBUG --
-                # tty: true # -- DUBUG --
                 ports:
                         - "443:443"
                 environment:
@@ -34,9 +31,6 @@ services:
                 container_name: "mariadb"
                 init: true
                 restart: "unless-stopped"
-                # command: sh # -- DUBUG --
-                # stdin_open: true # -- DUBUG --
-                # tty: true # -- DUBUG --
                 environment:
                         MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
                         MYSQL_USER: "${MYSQL_USER}"
@@ -60,9 +54,6 @@ services:
                 container_name: "wordpress"
                 init: true
                 restart: "unless-stopped"
-                # command: sh # -- DUBUG --
-                # stdin_open: true # -- DUBUG --
-                # tty: true # -- DUBUG --
                 environment:
                         WORDPRESS_DB_HOST: "mariadb"
                         WORDPRESS_DB_USER: "${MYSQL_USER}"
@@ -92,9 +83,6 @@ services:
                 container_name: "redis"
                 init: true
                 restart: "unless-stopped"
-                # command: sh # -- DUBUG --
-                # stdin_open: true # -- DUBUG --
-                # tty: true # -- DUBUG --
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.5"
@@ -112,9 +100,6 @@ services:
                 container_name: "ftp"
                 init: true
                 restart: "unless-stopped"
-                # command: sh # -- DUBUG --
-                # stdin_open: true # -- DUBUG --
-                # tty: true # -- DUBUG --
                 ports:
                         - "20:20"
                         - "21:21"
@@ -136,9 +121,6 @@ services:
                 container_name: "adminer"
                 init: true
                 restart: "unless-stopped"
-                # command: sh # -- DUBUG --
-                # stdin_open: true # -- DUBUG --
-                # tty: true # -- DUBUG --
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.6"
@@ -152,9 +134,6 @@ services:
                 container_name: "portfolio"
                 init: true
                 restart: "unless-stopped"
-                # command: sh # -- DUBUG --
-                # stdin_open: true # -- DUBUG --
-                # tty: true # -- DUBUG --
                 networks:
                         wordpressNetwork:
                                 ipv4_address: "13.37.0.7"
@@ -169,9 +148,6 @@ services:
                 container_name: "portainer"
                 init: true
                 restart: "unless-stopped"
-                # command: sh # -- DUBUG --
-                # stdin_open: true # -- DUBUG --
-                # tty: true # -- DUBUG --
                 ports:
                         - "9443:9443"
                         - "8000:8000"
